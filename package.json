@@ -1,0 +1,44 @@
+{
+  "name": "el_sv",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start:dev": "concurrently \"cd frontend && npm run dev\" \"cross-env NODE_ENV=development electron .\"",
+    "start:prod": "cross-env NODE_ENV=production electron .",
+    "start:backend": "cd backend && node server.js",
+    "start:electron": " electron .",
+    "build:frontend": "cd frontend && npm run build",
+    "build:electron": "electron-builder",
+    "build": "npm run build:frontend && npm run build:electron"
+  },
+  "build": {
+    "appId": "onyx.electron-svelte",
+    "productName": "ElectronSvelteApp",
+    "asar": false,
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "main.js",
+      "backend/**",
+      "frontend/build/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.icns"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
